@@ -10,9 +10,11 @@ find_package(catkin REQUIRED COMPONENTS
   g2o
 )
 
-#LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
-#find_package(Cholmod REQUIRED)
+LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
+find_package(Cholmod REQUIRED)
 find_package(Eigen3 REQUIRED)
+
+add_subdirectory(Thirdparty/DBoW2)
 
 catkin_package()
 
@@ -29,10 +31,8 @@ include_directories(
   ${PROJECT_SOURCE_DIR}
 )
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3 -march=native ")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall  -O3 -march=native")
-
-add_subdirectory(Thirdparty/DBoW2)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall -O3 -march=native ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -march=native")
 
 add_executable(${PROJECT_NAME}
   src/main.cc

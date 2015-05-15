@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+camera_name: wideLens
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [247.66229188834, 0, 299.486479309088, 0, 246.754685539785, 237.221290416772, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.288550233230336, 0.052403638980611, 0.00132167020136228, 0.00442261575675066, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [193.906875610352, 0, 337.832282557296, 0, 0, 213.336166381836, 237.047189876192, 0, 0, 0, 1, 0]

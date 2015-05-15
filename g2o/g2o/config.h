@@ -11,7 +11,7 @@
 #define G2O_HAVE_CHOLMOD 1
 /* #undef G2O_HAVE_CSPARSE */
 
-#define G2O_CXX_COMPILER "GNU /usr/bin/c++"
+#define G2O_CXX_COMPILER "GNU /usr/bin/g++"
 
 // give a warning if Eigen defaults to row-major matrices.
 // We internally assume column-major matrices throughout the code.
