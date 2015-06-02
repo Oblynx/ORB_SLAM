@@ -2,3 +2,7 @@ orb_slam/Data/ORBvoc.yml
 *~
 orb_slam/KeyFrameTrajectory.txt
 notes_*
+
+*.png
+*.bgm
+*.jp*g
