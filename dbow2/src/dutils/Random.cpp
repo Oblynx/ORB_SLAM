@@ -8,8 +8,8 @@
  *
  */
 
-#include "Random.h"
-#include "Timestamp.h"
+#include "dutils/Random.h"
+#include "dutils/Timestamp.h"
 #include <cstdlib>
 using namespace std;
 

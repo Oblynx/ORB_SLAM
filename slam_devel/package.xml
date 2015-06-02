@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>slam_devel</name>
+  <version>0.1.0</version>
+  <description>Experimental Slam package</description>
+
+  <maintainer email="vasilis4ch@gmail.com">Vassilis Choutas</maintainer>
+
+  <license>BSD</license>
+
+
+  <author>Vassilis Choutas</author>
+  <author>Konstantinos Samaras Tsakiris</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>orb_slam</exec_depend>
+  <exec_depend>akaze_features</exec_depend>
+  <exec_depend>dbow2</exec_depend>
+  <exec_depend>g2o</exec_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>dbow2</name>
+  <version>0.0.0</version>
+  <description>DBoW2 library catkin package</description>
+
+  <maintainer email="dorian3d@gmail.com">Dorian Galvez-Lopez</maintainer>
+  <author>Dorian Galvez-Lopez</author>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>OpenCV</depend>
+
+</package>

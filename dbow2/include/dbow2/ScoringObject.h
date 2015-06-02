@@ -10,7 +10,7 @@
 #ifndef __D_T_SCORING_OBJECT__
 #define __D_T_SCORING_OBJECT__
 
-#include "BowVector.h"
+#include "dbow2/BowVector.h"
 
 namespace DBoW2 {
 

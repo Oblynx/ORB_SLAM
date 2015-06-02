@@ -19,12 +19,12 @@
 #include <algorithm>
 #include <opencv/cv.h>
 
-#include "FeatureVector.h"
-#include "BowVector.h"
-#include "ScoringObject.h"
+#include "dbow2/FeatureVector.h"
+#include "dbow2/BowVector.h"
+#include "dbow2/ScoringObject.h"
 #include <limits>
 
-#include "../DUtils/Random.h"
+#include "dutils/Random.h"
 
 using namespace std;
 

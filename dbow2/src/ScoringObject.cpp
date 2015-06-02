@@ -8,8 +8,8 @@
  */
 
 #include <cfloat>
-#include "TemplatedVocabulary.h"
-#include "BowVector.h"
+#include "dbow2/TemplatedVocabulary.h"
+#include "dbow2/BowVector.h"
 
 using namespace DBoW2;
 
