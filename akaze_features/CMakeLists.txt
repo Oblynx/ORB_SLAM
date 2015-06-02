@@ -8,16 +8,19 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
 )
 
+
 include_directories(include
   ${catkin_INCLUDE_DIRS}
 )
 
 catkin_package(
   CATKIN_DEPENDS
-  roscpp
-  cv_bridge
-  sensor_msgs
-  image_transport
+    roscpp
+    cv_bridge
+    sensor_msgs
+    image_transport
+  LIBRARIES
+    ${PROJECT_NAME}_lib
   )
 
 # ============================================================================ #

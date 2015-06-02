@@ -29,7 +29,7 @@
 #include "Frame.h"
 #include "ORBVocabulary.h"
 
-#include<boost/thread.hpp>
+#include <boost/thread.hpp>
 
 
 namespace ORB_SLAM
