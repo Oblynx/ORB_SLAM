@@ -1,0 +1,21 @@
+<launch>
+
+  <arg name="camID" default="/dev/video1" />
+  <arg name="name" default="camera" />
+  <arg name="topic_name" default="/camera/image_raw" />
+
+  <node name="akaze_extractor_node" type="akaze_features_extractor" 
+    pkg="akaze_features" ns="/" output="screen" />
+
+  <node name="$(arg name)" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="$(arg camID)" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="topic_name" value="$(arg topic_name)" />
+    <param name="io_method" value="mmap"/>
+    <remap from="$(arg name)/image_raw" to="$(arg topic_name)" />
+
+  </node>
+
+</launch>
