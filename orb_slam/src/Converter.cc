@@ -18,9 +18,8 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-#include "Converter.h"
 #include "ros/ros.h"
+#include "orb_slam/Converter.h"
 
 namespace ORB_SLAM
 {

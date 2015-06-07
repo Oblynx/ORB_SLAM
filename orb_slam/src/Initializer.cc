@@ -18,12 +18,12 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Initializer.h"
+#include "orb_slam/Initializer.h"
 
 #include "dutils/Random.h"
 
-#include "Optimizer.h"
-#include "ORBmatcher.h"
+#include "orb_slam/Optimizer.h"
+#include "orb_slam/ORBmatcher.h"
 
 #include <boost/thread.hpp>
 

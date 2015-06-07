@@ -18,9 +18,9 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "KeyFrameDatabase.h"
+#include "orb_slam/KeyFrameDatabase.h"
 
-#include "KeyFrame.h"
+#include "orb_slam/KeyFrame.h"
 #include "dbow2/BowVector.h"
 #include <ros/ros.h>
 

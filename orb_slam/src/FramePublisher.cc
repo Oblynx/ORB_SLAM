@@ -18,8 +18,8 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "FramePublisher.h"
-#include "Tracking.h"
+#include "orb_slam/FramePublisher.h"
+#include "orb_slam/Tracking.h"
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>

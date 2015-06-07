@@ -26,17 +26,17 @@
 
 #include "opencv2/core/core.hpp"
 
-#include "Tracking.h"
-#include "FramePublisher.h"
-#include "Map.h"
-#include "MapPublisher.h"
-#include "LocalMapping.h"
-#include "LoopClosing.h"
-#include "KeyFrameDatabase.h"
-#include "ORBVocabulary.h"
+#include "orb_slam/Tracking.h"
+#include "orb_slam/FramePublisher.h"
+#include "orb_slam/Map.h"
+#include "orb_slam/MapPublisher.h"
+#include "orb_slam/LocalMapping.h"
+#include "orb_slam/LoopClosing.h"
+#include "orb_slam/KeyFrameDatabase.h"
+#include "orb_slam/ORBVocabulary.h"
 
 
-#include "Converter.h"
+#include "orb_slam/Converter.h"
 
 
 using namespace std;

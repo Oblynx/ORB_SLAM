@@ -18,10 +18,10 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "LocalMapping.h"
-#include "LoopClosing.h"
-#include "ORBmatcher.h"
-#include "Optimizer.h"
+#include "orb_slam/LocalMapping.h"
+#include "orb_slam/LoopClosing.h"
+#include "orb_slam/ORBmatcher.h"
+#include "orb_slam/Optimizer.h"
 
 #include <ros/ros.h>
 

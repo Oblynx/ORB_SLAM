@@ -18,8 +18,8 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MapPoint.h"
-#include "ORBmatcher.h"
+#include "orb_slam/MapPoint.h"
+#include "orb_slam/ORBmatcher.h"
 #include "ros/ros.h"
 
 namespace ORB_SLAM

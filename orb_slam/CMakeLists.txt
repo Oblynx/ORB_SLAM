@@ -18,17 +18,17 @@ find_package(Eigen3 REQUIRED)
 
 catkin_package(
   CATKIN_DEPENDS
-  roscpp
-  tf
-  cv_bridge
-  sensor_msgs
-  image_transport
-  g2o
-  dbow2
+    roscpp
+    tf
+    cv_bridge
+    sensor_msgs
+    image_transport
+    g2o
+    dbow2
+  INCLUDE_DIRS include
   )
 
-include_directories(
-  include
+include_directories(include
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
   ${CHOLMOD_INCLUDE_DIR}
@@ -39,6 +39,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall -O3 ")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3")
 
 add_executable(${PROJECT_NAME}
+  src/wrapper.cpp
   src/main.cc
   src/Tracking.cc
   src/LocalMapping.cc

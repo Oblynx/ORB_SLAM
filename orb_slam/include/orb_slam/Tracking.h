@@ -52,7 +52,8 @@ class Tracking
 {  
 
 public:
-    Tracking(ORBVocabulary* pVoc, FramePublisher* pFramePublisher, MapPublisher* pMapPublisher, Map* pMap, string strSettingPath);
+    Tracking(ORBVocabulary* pVoc, FramePublisher* pFramePublisher,
+             MapPublisher* pMapPublisher, Map* pMap, string strSettingPath);
 
     enum eTrackingState{
         SYSTEM_NOT_READY=-1,

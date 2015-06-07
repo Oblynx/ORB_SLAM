@@ -39,7 +39,7 @@
 #define PANDORA_SLAM_3D_PANDORA_SLAM_3D_H
 
 #include "state_manager/state_client.h"
-#include "orb_slam/wrapper.h" // TODO
+#include "orb_slam/wrapper.h"
 
 namespace pandora_slam_3d
 {

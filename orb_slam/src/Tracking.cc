@@ -18,20 +18,20 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Tracking.h"
+#include "orb_slam/Tracking.h"
 #include "ros/ros.h"
 #include "cv_bridge/cv_bridge.h"
 
 #include "opencv2/opencv.hpp"
 
-#include "ORBmatcher.h"
-#include "FramePublisher.h"
-#include "Converter.h"
-#include "Map.h"
-#include "Initializer.h"
+#include "orb_slam/ORBmatcher.h"
+#include "orb_slam/FramePublisher.h"
+#include "orb_slam/Converter.h"
+#include "orb_slam/Map.h"
+#include "orb_slam/Initializer.h"
 
-#include "Optimizer.h"
-#include "PnPsolver.h"
+#include "orb_slam/Optimizer.h"
+#include "orb_slam/PnPsolver.h"
 
 #include <iostream>
 #include <fstream>
@@ -43,9 +43,12 @@ namespace ORB_SLAM
 {
 
 
-Tracking::Tracking(ORBVocabulary* pVoc, FramePublisher *pFramePublisher, MapPublisher *pMapPublisher, Map *pMap, string strSettingPath):
-    mState(NO_IMAGES_YET), mpORBVocabulary(pVoc), mpFramePublisher(pFramePublisher), mpMapPublisher(pMapPublisher), mpMap(pMap),
-    mnLastRelocFrameId(0), mbPublisherStopped(false), mbReseting(false), mbForceRelocalisation(false), mbMotionModel(false)
+Tracking::Tracking(ORBVocabulary* pVoc, FramePublisher *pFramePublisher,
+                   MapPublisher *pMapPublisher, Map *pMap, string strSettingPath):
+    mState(NO_IMAGES_YET), mpORBVocabulary(pVoc),
+    mpFramePublisher(pFramePublisher), mpMapPublisher(pMapPublisher),
+    mpMap(pMap), mnLastRelocFrameId(0), mbPublisherStopped(false),
+    mbReseting(false), mbForceRelocalisation(false), mbMotionModel(false)
 {
     // Load camera parameters from settings file
 

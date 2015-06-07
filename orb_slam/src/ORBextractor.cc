@@ -59,7 +59,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <vector>
 
-#include "ORBextractor.h"
+#include "orb_slam/ORBextractor.h"
 
 #include <ros/ros.h>
 

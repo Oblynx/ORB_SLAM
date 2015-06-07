@@ -21,7 +21,7 @@
 
 #include <iostream>
 
-#include "PnPsolver.h"
+#include "orb_slam/PnPsolver.h"
 
 #include <vector>
 #include <cmath>

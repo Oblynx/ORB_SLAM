@@ -18,9 +18,9 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MapPublisher.h"
-#include "MapPoint.h"
-#include "KeyFrame.h"
+#include "orb_slam/MapPublisher.h"
+#include "orb_slam/MapPoint.h"
+#include "orb_slam/KeyFrame.h"
 
 namespace ORB_SLAM
 {

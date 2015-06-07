@@ -18,8 +18,8 @@
 * along with ORB-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Frame.h"
-#include "Converter.h"
+#include "orb_slam/Frame.h"
+#include "orb_slam/Converter.h"
 
 #include <ros/ros.h>
 

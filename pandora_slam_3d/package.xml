@@ -4,22 +4,17 @@
   <version>0.1.0</version>
   <description>Experimental 3D Slam package using ORB_SLAM</description>
 
-  <maintainer email="vasilis4ch@gmail.com">Vassilis Choutas</maintainer>
+  <maintainer email="kisamara@auth.gr">Konstantinos Samaras-Tsakiris</maintainer>
 
   <license>BSD</license>
 
-
-  <author>Vassilis Choutas</author>
   <author>Konstantinos Samaras-Tsakiris</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <exec_depend>orb_slam</exec_depend>
-  <exec_depend>akaze_features</exec_depend>
-  <exec_depend>dbow2</exec_depend>
-  <exec_depend>g2o</exec_depend>
+  <depend>roscpp</depend>
+  <depend>orb_slam</depend>
+  <depend>state_manager</depend>
+  <depend>roslint</depend>
 
-  <export>
-    <metapackage/>
-  </export>
 </package>

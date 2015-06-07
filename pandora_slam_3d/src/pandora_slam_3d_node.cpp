@@ -34,60 +34,16 @@
 *
 * Author: Konstantinos Samaras-Tsakiris
 *********************************************************************/
+
 #include "pandora_slam_3d/pandora_slam_3d.h"
 
-namespace pandora_slam_3d
-{
 
-PandoraSlam3d::PandoraSlam3d(int argc, char **argv): orbslamWrapper_(argc, argv)
+//!< Main function of the node
+int main (int argc, char **argv)
 {
-
-  state_ = state_manager_msgs::RobotModeMsg::MODE_OFF;
-  prevState_ = state_manager_msgs::RobotModeMsg::MODE_OFF;
-  clientInitialize();
+  ros::init(argc, argv, "pandora_slam_3d_node", ros::init_options::NoSigintHandler);
+  pandora_slam_3d::PandoraSlam3d slam3d(argc, argv);
+  ROS_DEBUG("Pandora Slam 3D node initialised");
+  ros::spin();
+  return 0;
 }
-
-
-/**
-@brief Implemented from StateClient. Called when the robot state changes
-@param newState type: int
-@return void
-**/
-void PandoraSlam3d::startTransition(int newState)
-{
-
-  state_ = newState;
-
-  if(state_ == state_manager_msgs::RobotModeMsg::MODE_TERMINATING)
-  {
-    ROS_ERROR("[Pandora SLAM 3D] Terminating node");
-    exit(0);
-  }
-
-  bool currStateOn = (state_ != 
-                        state_manager_msgs::RobotModeMsg::MODE_OFF);
-  bool prevStateOn = (prevState_ != 
-                        state_manager_msgs::RobotModeMsg::MODE_OFF);
-
-  if(currStateOn && !prevStateOn) {
-    orbslamWrapper_.start();
-  } else if(!currStateOn && prevStateOn) {
-    orbslamWrapper_.stop();
-  }
-
-  prevState_ = state_;
-
-  transitionComplete(state_);
-}
-
-/**
-@brief Implements the state transition end. Inherited from State client.
-@param void
-@return void
-**/
-void PandoraSlam3d::completeTransition(void)
-{
-}
-
-} // namespace pandora_slam_3d
-

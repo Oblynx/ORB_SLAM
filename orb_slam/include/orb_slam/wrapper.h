@@ -54,10 +54,9 @@
 #include "KeyFrameDatabase.h"
 #include "ORBVocabulary.h"
 
-
 #include "Converter.h"
 
-namespace orb_slam{
+namespace ORB_SLAM{
 
 /**
  @class Wrapper
@@ -67,14 +66,26 @@ namespace orb_slam{
 class Wrapper{
 	public:
 		Wrapper(int argc, char** argv, const std::string& ns);
-		start();
-		stop();
+		void start();
+		void stop();
 	private:
 		int argc_;
 		char** argv_;
 		ros::NodeHandle nh_;
+
+		//!< orbslam related fields
+		//Create the map
+  	ORB_SLAM::Map world_;
+  	//Create Frame Publisher for image_view
+  	ORB_SLAM::FramePublisher framePub_;
+  	//Create Map Publisher for Rviz
+  	ORB_SLAM::MapPublisher mapPub_;
+  	//Initialize the Tracking Thread and launch
+  	ORB_SLAM::Tracking* pTracker_;
+  	//This "main" thread will show the current processed frame and publish the map
+  	float fps_;
 };
 
-}	// namespace orb_slam
+}	// namespace ORB_SLAM
 
 #endif //ORB_SLAM_WRAPPER_H
