@@ -15,7 +15,6 @@ LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 find_package(Cholmod REQUIRED)
 find_package(Eigen3 REQUIRED)
 
-
 catkin_package(
   CATKIN_DEPENDS
     roscpp
@@ -25,6 +24,8 @@ catkin_package(
     image_transport
     g2o
     dbow2
+    Cholmod
+    Eigen3
   INCLUDE_DIRS include
   )
 

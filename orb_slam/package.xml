@@ -1,4 +1,4 @@
-<package>
+<package format="2">
   <name>orb_slam</name>
   <version>0.0.0</version>
   <description>orb_slam</description>
@@ -9,20 +9,15 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <build_depend>roscpp</build_depend>
-  <build_depend>tf</build_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <build_depend>image_transport</build_depend>
-  <build_depend>cv_bridge</build_depend>
-  <build_depend>suitesparse</build_depend>
-  <build_depend>g2o</build_depend>
-  <build_depend>dbow2</build_depend>
+  <depend>roscpp</depend>
+  <depend>tf</depend>
+  <depend>sensor_msgs</depend>
+  <depend>image_transport</depend>
+  <depend>cv_bridge</depend>
+  <depend>suitesparse</depend>
+  <depend>g2o</depend>
+  <depend>dbow2</depend>
+  <depend>Eigen3</depend>
+  <depend>Cholmod</depend>
 
-  <run_depend>roscpp</run_depend>
-  <run_depend>tf</run_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <run_depend>image_transport</run_depend>
-  <run_depend>cv_bridge</run_depend>
-  <run_depend>g2o</run_depend>
-  <run_depend>dbow2</run_depend>
 </package>

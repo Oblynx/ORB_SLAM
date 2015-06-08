@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(pandora_slam_3d)
 
+LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
+find_package(Cholmod REQUIRED)
+find_package(Eigen3 REQUIRED)
+
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   orb_slam
@@ -9,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-  CATKIN_DEPENDS
+	CATKIN_DEPENDS
 		roscpp
 		orb_slam
 		state_manager
