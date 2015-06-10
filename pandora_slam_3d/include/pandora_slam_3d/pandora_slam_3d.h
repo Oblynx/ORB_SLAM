@@ -55,7 +55,7 @@ class PandoraSlam3d : public StateClient
   int state_;
   int prevState_;
 
-  orb_slam::Wrapper orbslamWrapper_;
+  ORB_SLAM::Wrapper orbslamWrapper_;
 
  public:
   /**

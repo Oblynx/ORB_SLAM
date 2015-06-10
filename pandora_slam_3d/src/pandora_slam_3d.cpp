@@ -39,7 +39,8 @@
 namespace pandora_slam_3d
 {
 
-PandoraSlam3d::PandoraSlam3d(int argc, char **argv): orbslamWrapper_(argc, argv)
+PandoraSlam3d::PandoraSlam3d(int argc, char **argv):
+    orbslamWrapper_(argc, argv, "pandora_slam_3d")
 {
 
   state_ = state_manager_msgs::RobotModeMsg::MODE_OFF;

@@ -24,10 +24,15 @@ catkin_package(
     image_transport
     g2o
     dbow2
+  DEPENDS
     Cholmod
     Eigen3
-  INCLUDE_DIRS include
-  )
+  INCLUDE_DIRS
+    include
+    ${EIGEN3_INCLUDE_DIR}
+  LIBRARIES
+    orb_slam
+)
 
 include_directories(include
   ${catkin_INCLUDE_DIRS}
@@ -39,9 +44,9 @@ include_directories(include
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall -O3 ")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3")
 
-add_executable(${PROJECT_NAME}
+##################### Build libs ######################
+add_library(orb_slam
   src/wrapper.cpp
-  src/main.cc
   src/Tracking.cc
   src/LocalMapping.cc
   src/LoopClosing.cc
@@ -61,15 +66,17 @@ add_executable(${PROJECT_NAME}
   src/Initializer.cc
 )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(orb_slam
   ${catkin_LIBRARIES}
   ${EIGEN3_LIBS}
-#  cholmod
-#  g2o_core
-#  g2o_solver_cholmod
-#  g2o_solver_dense
-#  g2o_stuff
-#  g2o_types_sba
-#  g2o_types_sim3
-#  g2o_types_slam3d
+)
+
+##################### Build exec ######################
+add_executable(orb_slam_node
+  src/main.cc
+)
+target_link_libraries(orb_slam_node
+  ${catkin_LIBRARIES}
+  ${EIGEN3_LIBS}
+  orb_slam
 )
