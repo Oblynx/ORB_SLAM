@@ -1,0 +1,8 @@
+<launch>
+	<!-- Camera driver -->
+	<include file="$(find pandora_slam_3d)/launch/usb_cam.launch"/>
+	<!--State Manager -->	
+  <include file="$(find state_manager)/launch/stateManager.launch"/>
+  <!-- Slam -->
+	<include file="$(find pandora_slam_3d)/launch/pandora_slam_3d.launch"/>
+</launch>

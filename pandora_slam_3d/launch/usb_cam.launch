@@ -1,0 +1,22 @@
+<!-- Launch alternative camera driver, if libuvc_camera doesn't work -->
+<launch>
+
+  <arg name="name" default="camera"/>
+  <arg name="camID" default="/dev/video0"/>
+  <arg name="topic_name" default="/camera/image_raw"/>
+  <arg name="frame_id" default="camera"/>
+
+  <node name="$(arg name)_node" pkg="usb_cam" type="usb_cam_node" output="screen">
+    <param name="video_device" value="$(arg camID)" />
+    <!--<param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="hfov" value="61.14" />
+    <param name="vfov" value="48" />-->
+    <param name="pixel_format" value="yuyv" />
+    <param name="topic_name" value="$(arg topic_name)" />
+    <param name="camera_frame_id" value="$(arg frame_id)" />
+    <param name="io_method" value="mmap"/>
+    <remap from="$(arg name)/image_raw" to="$(arg topic_name)" />
+  </node>
+  
+</launch>
