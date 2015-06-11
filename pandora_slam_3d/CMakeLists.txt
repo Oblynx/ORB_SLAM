@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   orb_slam
   state_manager
+  libuvc_camera
   roslint
 )
 
@@ -13,6 +14,7 @@ catkin_package(
 		roscpp
 		orb_slam
 		state_manager
+    libuvc_camera
 		roslint
 	INCLUDE_DIRS
 		include

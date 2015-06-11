@@ -1,5 +1,6 @@
 %YAML:1.0
 
+Camera.name: camStick
 # Camera Parameters for camera model Logitech Quickcam Pro:
 # idVendor: 046d	idProduct:0991
 
@@ -16,7 +17,7 @@ Camera.p1: 0.000825220
 Camera.p2: -0.001619228
 
 # Camera frames per second 
-Camera.fps: 30.0
+Camera.fps: 25.0
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
@@ -25,19 +26,19 @@ Camera.RGB: 1
 ### Changing the parameters below could seriously degrade the performance of the system
 
 # ORB Extractor: Number of features per image
-ORBextractor.nFeatures: 2000
+ORBextractor.nFeatures: 2500
 
 # ORB Extractor: Scale factor between levels in the scale pyramid 	
 # default: 1.2
-ORBextractor.scaleFactor: 1.1
+ORBextractor.scaleFactor: 1.18
 
 # ORB Extractor: Number of levels in the scale pyramid	
 # default: 8
-ORBextractor.nLevels: 16
+ORBextractor.nLevels: 10
 
 # ORB Extractor: Fast threshold (lower less restrictive)
 # default: 20
-ORBextractor.fastTh: 18
+ORBextractor.fastTh: 12
 
 # ORB Extractor: Score to sort features. 0 -> Harris Score, 1 -> FAST Score
 # default: 1

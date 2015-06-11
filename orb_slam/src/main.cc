@@ -70,6 +70,10 @@ int main(int argc, char **argv)
         return 1;
     }
 
+//######## DEBUG BREAKPOINT #########
+//asm("int $3");
+//######## DEBUG BREAKPOINT #########
+
     //Create Frame Publisher for image_view
     ORB_SLAM::FramePublisher FramePub;
 

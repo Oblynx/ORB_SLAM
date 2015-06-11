@@ -39,89 +39,76 @@
 
 namespace ORB_SLAM{
 
-Wrapper::Wrapper(int argc, char** argv, const std::string& ns):
-		argc_(argc), argv_(argv), nh_(ns), world_(), framePub_(), mapPub_(&world_)
-	{
+Wrapper::Wrapper(const std::string& ns):
+		nh_(ns), world_(), framePub_(), mapPub_(&world_)
+{
 	ROS_INFO_STREAM(endl << "ORB-SLAM Copyright (C) 2014 Raul Mur-Artal" << endl <<
             "This program comes with ABSOLUTELY NO WARRANTY;" << endl  <<
             "This is free software, and you are welcome to redistribute it" << endl <<
             "under certain conditions. See LICENSE.txt." << endl);
-	if(argc != 3)
-  {
-      ROS_FATAL("[%s]: Insufficient input arguments\n", nh_.getNamespace().c_str());
-  }
 
   // Load Settings and Check
-  string strSettingsFile = ros::package::getPath("orb_slam")+"/"+argv[2];
+  nh_.param<std::string>("ORB_vocabulary_path", paths[0], "Data/ORBvoc.yml");
+  nh_.param<std::string>("orb_slam_settings_path", paths[1], "Data/default_settings.yaml");
 
-  cv::FileStorage fsSettings(strSettingsFile.c_str(), cv::FileStorage::READ);
+  strSettingsFile_ = ros::package::getPath("orb_slam")+"/"+paths[1].c_str();
+
+  cv::FileStorage fsSettings(strSettingsFile_.c_str(), cv::FileStorage::READ);
   if(!fsSettings.isOpened())
   {
-      ROS_FATAL("[%s]: Wrong path to settings. Path must be absolute or relative to ORB_SLAM package directory.",
-                nh_.getNamespace().c_str());
+    ROS_FATAL("[%s]: Wrong path to settings. Path must be absolute or relative\
+              to ORB_SLAM package directory. Path given:\n%s",
+              nh_.getNamespace().c_str(), strSettingsFile_.c_str());
   }
-
-  
 
   //Load ORB Vocabulary
-  string strVocFile = ros::package::getPath("orb_slam")+"/"+argv[1];
+  strVocFile_ = ros::package::getPath("orb_slam")+"/"+paths[0].c_str();
   ROS_INFO("[%s]: Loading ORB Vocabulary. This could take a while.\n", nh_.getNamespace().c_str());
-  cv::FileStorage fsVoc(strVocFile.c_str(), cv::FileStorage::READ);
+  cv::FileStorage fsVoc(strVocFile_.c_str(), cv::FileStorage::READ);
   if(!fsVoc.isOpened())
   {
-      ROS_FATAL("[%s]: Wrong path to vocabulary. Path must be absolute or relative to ORB_SLAM package directory.",
-                nh_.getNamespace().c_str());
+    ROS_FATAL("[%s]: Wrong path to vocabulary. Path must be absolute or relative\
+              to ORB_SLAM package directory. Path given:\n%s",
+              nh_.getNamespace().c_str(), strVocFile_.c_str());
   }
-  ORB_SLAM::ORBVocabulary Vocabulary;
-  Vocabulary.load(fsVoc);
 
+  vocabulary_.load(fsVoc);
   ROS_INFO("[%s]: Vocabulary loaded!\n\n", nh_.getNamespace().c_str());
 
-  //Create KeyFrame Database
-  ORB_SLAM::KeyFrameDatabase Database(Vocabulary);
-
-  
-  framePub_.SetMap(&world_);
-
-  pTracker_= new ORB_SLAM::Tracking(&Vocabulary, &framePub_, &mapPub_, &world_,
-                                   strSettingsFile);
-  boost::thread trackingThread(&ORB_SLAM::Tracking::Run, pTracker_);
-
-  pTracker_->SetKeyFrameDatabase(&Database);
-
-  //Initialize the Local Mapping Thread and launch
-  ORB_SLAM::LocalMapping LocalMapper(&world_);
-  boost::thread localMappingThread(&ORB_SLAM::LocalMapping::Run,&LocalMapper);
-
-  //Initialize the Loop Closing Thread and launch
-  ORB_SLAM::LoopClosing LoopCloser(&world_, &Database, &Vocabulary);
-  boost::thread loopClosingThread(&ORB_SLAM::LoopClosing::Run, &LoopCloser);
-
-  //Set pointers between threads
-  pTracker_->SetLocalMapper(&LocalMapper);
-  pTracker_->SetLoopClosing(&LoopCloser);
-
-  LocalMapper.SetTracker(pTracker_);
-  LocalMapper.SetLoopCloser(&LoopCloser);
-
-  LoopCloser.SetTracker(pTracker_);
-  LoopCloser.SetLocalMapper(&LocalMapper);
-
+  //This "main" thread will show the current processed frame and publish the map
   fps_ = fsSettings["Camera.fps"];
-  if(fps_==0)
-      fps_=30;
+  if(fps_ == 0)
+      fps_= 30;
 
+  database_= new ORB_SLAM::KeyFrameDatabase(vocabulary_);
+  framePub_.SetMap(&world_);
+  //Initialize the Tracking, LocalMapping & LoopClosing threads
+  pTracker_= new ORB_SLAM::Tracking(&vocabulary_, &framePub_, &mapPub_, &world_,
+                                    strSettingsFile_);
+  localMapper_= new ORB_SLAM::LocalMapping(&world_);
+  loopCloser_= new ORB_SLAM::LoopClosing(&world_, database_, &vocabulary_);
+
+  ROS_INFO("[orb_slam]: Successfully constructed.");
 }
 
 void Wrapper::start(){
-	ros::Rate r(fps_);
-  while (ros::ok())
-  {
-      framePub_.Refresh();
-      mapPub_.Refresh();
-      pTracker_->CheckResetByPublishers();
-      r.sleep();
-  }
+  //Launch the Tracking, LocalMapping & LoopClosing threads
+  trackingThread_= boost::thread(&ORB_SLAM::Tracking::Run, pTracker_);
+  pTracker_->SetKeyFrameDatabase(database_);
+  localMappingThread_= boost::thread(&ORB_SLAM::LocalMapping::Run, localMapper_);
+  loopClosingThread_= boost::thread(&ORB_SLAM::LoopClosing::Run, loopCloser_);
+
+  //Set pointers between threads
+  pTracker_->SetLocalMapper(localMapper_);
+  pTracker_->SetLoopClosing(loopCloser_);
+  localMapper_->SetTracker(pTracker_);
+  localMapper_->SetLoopCloser(loopCloser_);
+  loopCloser_->SetTracker(pTracker_);
+  loopCloser_->SetLocalMapper(localMapper_);
+
+  mainLoopThread_= boost::thread(&ORB_SLAM::Wrapper::mainLoop, this);
+
+  ROS_INFO("[orb_slam]: Threads launched, starting work.");
 }
 
 void Wrapper::stop(){
@@ -153,6 +140,18 @@ void Wrapper::stop(){
 
   }
   f.close();
+}
+
+void Wrapper::mainLoop(){
+  ros::Rate r(fps_);
+  
+  while (ros::ok())
+  {
+      framePub_.Refresh();
+      mapPub_.Refresh();
+      pTracker_->CheckResetByPublishers();
+      r.sleep();
+  }
 }
 
 }	// namespace orb_slam

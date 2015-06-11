@@ -15,6 +15,7 @@
   <depend>roscpp</depend>
   <depend>orb_slam</depend>
   <depend>state_manager</depend>
+  <depend>libuvc_camera</depend>
   <depend>roslint</depend>
 
 </package>

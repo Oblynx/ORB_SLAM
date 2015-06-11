@@ -39,6 +39,7 @@
 #define ORB_SLAM_WRAPPER_H
 
 #include <fstream>
+#include <string>
 #include <ros/ros.h>
 #include <ros/package.h>
 #include <boost/thread.hpp>
@@ -65,24 +66,47 @@ namespace ORB_SLAM{
  **/
 class Wrapper{
 	public:
-		Wrapper(int argc, char** argv, const std::string& ns);
+		/**
+		@brief Constructor. Gets file paths from ROS parameter server
+		@param ns: Nodehandle namespace
+		**/
+		Wrapper(const std::string& ns);
 		void start();
 		void stop();
 	private:
-		int argc_;
-		char** argv_;
-		ros::NodeHandle nh_;
+		void mainLoop();
 
-		//!< orbslam related fields
-		//Create the map
+		ros::NodeHandle nh_;
+		std::string paths[2];
+
+		//! orbslam related fields
+		//! Path to settings file
+		string strSettingsFile_;
+		//! Path to vocabulary file
+		string strVocFile_;
+		ORB_SLAM::ORBVocabulary vocabulary_;
+
+		// Create the map
   	ORB_SLAM::Map world_;
-  	//Create Frame Publisher for image_view
+  	// Create Frame Publisher for image_view
   	ORB_SLAM::FramePublisher framePub_;
-  	//Create Map Publisher for Rviz
+  	// Create Map Publisher for Rviz
   	ORB_SLAM::MapPublisher mapPub_;
-  	//Initialize the Tracking Thread and launch
+
+  	// Create tracker
   	ORB_SLAM::Tracking* pTracker_;
-  	//This "main" thread will show the current processed frame and publish the map
+  	boost::thread trackingThread_;
+  	// Create KeyFrame Database
+  	ORB_SLAM::KeyFrameDatabase* database_;
+  	// Initialize the Local Mapping Thread
+  	ORB_SLAM::LocalMapping* localMapper_;
+  	boost::thread localMappingThread_;
+  	// Initialize the Loop Closing Thread
+  	ORB_SLAM::LoopClosing* loopCloser_;
+  	boost::thread loopClosingThread_;
+  	
+  	boost::thread mainLoopThread_;
+
   	float fps_;
 };
 

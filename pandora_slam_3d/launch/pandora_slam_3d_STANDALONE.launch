@@ -1,6 +1,6 @@
 <launch>
 	<!-- Camera driver -->
-	<include file="$(find pandora_slam_3d)/launch/usb_cam.launch"/>
+	<include file="$(find libuvc_camera)/launch/libuvc_camera_driver.launch"/>
 	<!--State Manager -->	
   <include file="$(find state_manager)/launch/stateManager.launch"/>
   <!-- Slam -->

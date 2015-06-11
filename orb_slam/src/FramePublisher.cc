@@ -143,6 +143,7 @@ cv::Mat FramePublisher::DrawFrame()
 void FramePublisher::PublishFrame()
 {
     cv::Mat im = DrawFrame();
+
     cv_bridge::CvImage rosImage;
     rosImage.image = im.clone();
     rosImage.header.stamp = ros::Time::now();

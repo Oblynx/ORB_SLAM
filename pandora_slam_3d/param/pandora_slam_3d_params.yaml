@@ -1,0 +1,3 @@
+# Paths relative to orb_slam ros package
+ORB_vocabulary_path: Data/ORBvoc.yml
+#orb_slam_settings_path: Data/camStick_settings.yaml

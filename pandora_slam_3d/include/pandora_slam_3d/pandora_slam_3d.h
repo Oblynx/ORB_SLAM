@@ -55,6 +55,7 @@ class PandoraSlam3d : public StateClient
   int state_;
   int prevState_;
 
+  //! orbslam instance
   ORB_SLAM::Wrapper orbslamWrapper_;
 
  public:
@@ -64,7 +65,7 @@ class PandoraSlam3d : public StateClient
   @param argv [char **] The input arguments
   @return void
   **/
-  PandoraSlam3d(int argc, char **argv);
+  PandoraSlam3d(const std::string& ns);
 
   /**
   @brief Implemented from StateClient. Called when the robot state changes

@@ -16,7 +16,7 @@
     <param name="topic_name" value="$(arg topic_name)" />
     <param name="camera_frame_id" value="$(arg frame_id)" />
     <param name="io_method" value="mmap"/>
-    <remap from="$(arg name)/image_raw" to="$(arg topic_name)" />
+    <remap from="$(arg name)_node/image_raw" to="$(arg topic_name)" />
   </node>
   
 </launch>
