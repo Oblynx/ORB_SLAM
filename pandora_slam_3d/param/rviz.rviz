@@ -34,7 +34,7 @@ Visualization Manager:
   Displays:
     - Class: rviz/Marker
       Enabled: true
-      Marker Topic: /pandora_slam/ORB_SLAM/Map
+      Marker Topic: /pandora_slam_3d/ORB_SLAM/Map
       Name: Marker
       Namespaces:
         Camera: true

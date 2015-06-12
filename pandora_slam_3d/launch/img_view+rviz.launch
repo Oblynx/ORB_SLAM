@@ -1,7 +1,6 @@
 <launch>
 	<node pkg="image_view" type="image_view" name="image_view" respawn="false" output="log">
-		<!--<remap from="/image" to="/ORB_SLAM/Frame" />-->
-		<remap from="/image" to="/camera/image_raw" />
+		<remap from="/image" to="pandora_slam_3d/ORB_SLAM/Frame" />
 		<param name="autosize" value="true"/>
 	</node>
 	<node pkg="rviz" type="rviz" name="rviz"

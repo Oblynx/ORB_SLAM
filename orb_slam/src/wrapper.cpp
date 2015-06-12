@@ -59,6 +59,7 @@ Wrapper::Wrapper(const std::string& ns):
     ROS_FATAL("[%s]: Wrong path to settings. Path must be absolute or relative\
               to ORB_SLAM package directory. Path given:\n%s",
               nh_.getNamespace().c_str(), strSettingsFile_.c_str());
+    ros::shutdown();
   }
 
   //Load ORB Vocabulary
@@ -70,6 +71,7 @@ Wrapper::Wrapper(const std::string& ns):
     ROS_FATAL("[%s]: Wrong path to vocabulary. Path must be absolute or relative\
               to ORB_SLAM package directory. Path given:\n%s",
               nh_.getNamespace().c_str(), strVocFile_.c_str());
+    ros::shutdown();
   }
 
   vocabulary_.load(fsVoc);

@@ -17,7 +17,7 @@ Camera.p1: 0.000825220
 Camera.p2: -0.001619228
 
 # Camera frames per second 
-Camera.fps: 25.0
+Camera.fps: 30.0
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
@@ -38,7 +38,7 @@ ORBextractor.nLevels: 10
 
 # ORB Extractor: Fast threshold (lower less restrictive)
 # default: 20
-ORBextractor.fastTh: 12
+ORBextractor.fastTh: 8
 
 # ORB Extractor: Score to sort features. 0 -> Harris Score, 1 -> FAST Score
 # default: 1
