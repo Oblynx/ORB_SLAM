@@ -44,6 +44,9 @@ int main (int argc, char **argv)
   ros::init(argc, argv, "pandora_slam_3d_node", ros::init_options::NoSigintHandler);
   pandora_slam_3d::PandoraSlam3d slam3d("pandora_slam_3d");	//!< Namespace
   ROS_DEBUG("Pandora Slam 3D node initialised");
-  ros::spin();
+  
+  while(ros::ok()){
+  	ros::spinOnce();
+  }
   return 0;
 }
